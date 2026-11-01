@@ -81,22 +81,27 @@ createButton("SCAN PLAYERS", 65, function()
     end
 end)
 
+
 createButton("SCAN TRADE REMOTES", 110, function()
-    local folder = ReplicatedStorage:FindFirstChild("TradeRemotes")
+    writeLog("Starting recursive RemoteEvent scan...")
 
-    if not folder then
-        writeLog("TradeRemotes folder not found.")
-        return
-    end
+    local found = 0
 
-    for _, remote in ipairs(folder:GetDescendants()) do
-        if remote:IsA("RemoteEvent") then
-            writeLog("RemoteEvent: " .. remote.Name)
-        elseif remote:IsA("RemoteFunction") then
-            writeLog("RemoteFunction: " .. remote.Name)
+    for _, obj in ipairs(game:GetDescendants()) do
+        if obj:IsA("RemoteEvent") then
+            found += 1
+            writeLog("[REMOTE EVENT] " .. obj:GetFullName())
+
+        elseif obj:IsA("RemoteFunction") then
+            found += 1
+            writeLog("[REMOTE FUNCTION] " .. obj:GetFullName())
         end
     end
+
+    writeLog("Scan completed.")
+    writeLog("Total remotes found: " .. found)
 end)
+
 
 createButton("SCAN MY INVENTORY", 155, function()
     local inventory = LocalPlayer:FindFirstChild("Inventory")
