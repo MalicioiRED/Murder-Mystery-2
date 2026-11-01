@@ -61,9 +61,13 @@ Log.Size = UDim2.new(1, -24, 0, 145)
 Log.Position = UDim2.fromOffset(12, 250)
 Log.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
 Log.BorderSizePixel = 0
-Log.ScrollBarThickness = 6
-Log.CanvasSize = UDim2.new(0, 0, 0, 0)
+Log.ScrollBarThickness = 8
+Log.ScrollBarImageColor3 = Color3.fromRGB(150, 100, 255)
+Log.ScrollingDirection = Enum.ScrollingDirection.Y
+Log.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
 Log.AutomaticCanvasSize = Enum.AutomaticSize.Y
+Log.CanvasSize = UDim2.new(0, 0, 0, 0)
+Log.Active = true
 Log.Parent = Main
 
 local LogText = Instance.new("TextLabel")
