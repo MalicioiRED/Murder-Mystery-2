@@ -55,22 +55,41 @@ local function createButton(name, position, callback)
     return button
 end
 
-local Log = Instance.new("TextLabel")
+
+local Log = Instance.new("ScrollingFrame")
 Log.Size = UDim2.new(1, -24, 0, 145)
 Log.Position = UDim2.fromOffset(12, 250)
 Log.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
-Log.TextColor3 = Color3.fromRGB(120, 255, 170)
-Log.Font = Enum.Font.Code
-Log.TextSize = 11
-Log.TextXAlignment = Enum.TextXAlignment.Left
-Log.TextYAlignment = Enum.TextYAlignment.Top
-Log.TextWrapped = true
-Log.Text = "LEOHUB initialized.\nWaiting for audit..."
+Log.BorderSizePixel = 0
+Log.ScrollBarThickness = 6
+Log.CanvasSize = UDim2.new(0, 0, 0, 0)
+Log.AutomaticCanvasSize = Enum.AutomaticSize.Y
 Log.Parent = Main
 
+local LogText = Instance.new("TextLabel")
+LogText.Size = UDim2.new(1, -12, 0, 0)
+LogText.AutomaticSize = Enum.AutomaticSize.Y
+LogText.BackgroundTransparency = 1
+LogText.TextColor3 = Color3.fromRGB(120, 255, 170)
+LogText.Font = Enum.Font.Code
+LogText.TextSize = 11
+LogText.TextXAlignment = Enum.TextXAlignment.Left
+LogText.TextYAlignment = Enum.TextYAlignment.Top
+LogText.TextWrapped = true
+LogText.Text = "LEOHUB initialized.\nWaiting for audit..."
+LogText.Parent = Log
+
 local function writeLog(message)
-    Log.Text = Log.Text .. "\n" .. message
+    LogText.Text = LogText.Text .. "\n" .. message
+
+    task.defer(function()
+        Log.CanvasPosition = Vector2.new(
+            0,
+            Log.AbsoluteCanvasSize.Y
+        )
+    end)
 end
+
 
 createButton("SCAN PLAYERS", 65, function()
     local count = #Players:GetPlayers()
