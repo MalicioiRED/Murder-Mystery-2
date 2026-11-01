@@ -102,7 +102,6 @@ createButton("SCAN TRADE REMOTES", 110, function()
     writeLog("Total remotes found: " .. found)
 end)
 
-
 createButton("SCAN MY INVENTORY", 155, function()
     local inventory = LocalPlayer:FindFirstChild("Inventory")
 
